@@ -1,0 +1,127 @@
+@layout('master')
+@section('content')
+@set('title', 'Todo List')
+<style>
+    ul {
+        list-style-type: none;
+    }
+    </style>
+<div id="colorlib-main">
+    <section class="ftco-section bg-light ftco-bread">
+        <div class="container">
+            @component('partials.todoModal', {auth})
+            @endcomponent 
+            <div class="row no-gutters slider-text align-items-center">
+            <div class="col-md-9 ftco-animate">
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Todo</span></p>
+            <h1 class="mb-3 bread">TODO</h1>
+            <p>Add a Todo List</p>
+        </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section contact-section">
+    <div class="container">
+      <div class="row d-flex mb-5 contact-info">
+        <div class="col-md-12 mb-4">
+          <h2 class="h3">Todos</h2>
+        </div>
+       
+        <div class="w-100"></div>
+        <div class="col-md-12 d-flex">
+            <div class="info bg-light p-4">
+                @if(infos)
+                <table>
+                  <thead>
+                      <tr>
+                          <th>Label</th>
+                          <th>Action</th>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                  @each(info in infos)
+                    <tr>
+                          <td>
+                              <ul>
+                                  <li>
+                                      <h5>Added By: {{info.name}}</h5>
+                                  </li>
+                                  <li>
+                                      <label>Added Date: {{info.infos.date}}</label>
+                                  </li>
+                                  <li>
+                                      <label>Event Date: {{info.infos.todoDate}}</label>
+                                  </li>
+                                  <li>
+                                      <label>Event Time: {{info.infos.todoTime}}</label>
+                                  </li>
+                                  <li>
+                                     <label> Desc: <i>{{info.infos.desc}}</li></label>
+                                  </li>
+                              </ul>
+                          <td>
+                                  <ul>
+                                      <li>
+                                          <button class="form-control btn btn-success" style="color: green; border-radius: 3px" id="done" onclick="remove('done', '{{info._id}}','{{info.infos.id}}')">
+                                              <i class="fa fa-check" aria-hidden="true"></i>
+                                          </button>
+                                          <br />
+                                          <br />
+                                          <button style="color:red; border-radius: 3px" id="delete" class="form-control btn btn-danger" onclick="remove('remove','{{info._id}}','{{info.infos.id}}')">
+                                              <i class="fa fa-times" aria-hidden="true"></i>
+                                          </button>
+                                      </li>
+                                  </ul>
+                          </td>
+                  </tr>
+
+                  @endeach
+              </tbody>
+              </table>
+              @else 
+                  <p>Nothing to show</p>
+                @endif
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</div>    
+<input type="hidden" id="name" value="{{auth.user.name}}" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="module" src="/custom/js/todo.js"></script>
+<script type="text/javascript" src="/custom/js/customToastr.js"></script>
+<script type="text/javascript">
+  
+    const remove = (tag, id, todoID) => {
+        import('/dashboard/custom/js/customToastr.js').then(({showToast}) => {
+            if(tag == "done")   showToast("success", "Marking as Done...", "toast-top-center", '5000');
+            if(tag == "remove")  showToast("warning", "Removing from Todo List...", "toast-top-center", '5000');
+            $.ajax({
+                url: '/shs/todo/delete',
+                type: 'post',
+                data: {id, todoID},
+                success: (data) => {
+                        showToast("success", data.msg, 'toast-top-center', 1500);
+                        return setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                },
+                error: (error) => {
+                        showToast("error", error.responseJSON.msg, "toast-top-center", 1500);
+                        return setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                }
+            })
+        })
+    }
+   
+   
+</script>
+@endsection

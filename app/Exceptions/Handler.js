@@ -1,0 +1,55 @@
+"use strict";
+
+const BaseExceptionHandler = use("BaseExceptionHandler");
+const logger = use("shs2010/logger");
+
+/**
+ * This class handles all exceptions thrown during
+ * the HTTP request lifecycle.
+ *
+ * @class ExceptionHandler
+ */
+class ExceptionHandler extends BaseExceptionHandler {
+  /**
+   * Handle exception thrown during the HTTP lifecycle
+   *
+   * @method handle
+   *
+   * @param  {Object} error
+   * @param  {Object} options.request
+   * @param  {Object} options.response
+   *
+   * @return {void}
+   */
+  async handle(error, { response, auth, request }) {
+    if (error.code === "E_INVALID_SESSION") {
+      return response.status(error.status).send({
+        err: [{ message: "Session has expired. Kindly login again." }]
+      });
+    }
+    console.log(error);
+    logger.log(request, "error", "errorHandle", auth.user, null, error);
+    return response.status(error.status).send({
+      err: [
+        {
+          message: "Server Error. Contact support.",
+          log: error.message
+        }
+      ]
+    });
+  }
+
+  /**
+   * Report exception for logging or debugging.
+   *
+   * @method report
+   *
+   * @param  {Object} error
+   * @param  {Object} options.request
+   *
+   * @return {void}
+   */
+  async report(error, { request }) {}
+}
+
+module.exports = ExceptionHandler;

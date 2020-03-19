@@ -1,0 +1,10 @@
+{
+  "name": "example",
+  "hostId":"Queue",
+  "host": "127.0.0.1",
+  "port": 6379,
+  "basepath": "/",
+  "type": "bee",
+  "db": 1,
+  "prefix": "bq"
+}

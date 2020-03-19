@@ -1,0 +1,46 @@
+<style>
+.vl {
+        border-left: 1px dotted black;
+        height: auto;
+    }
+    </style>
+
+
+<input type="hidden" id="month"value={{year}}/>
+<input type="hidden" value="{{auth.user.name}}" id="name"/>
+<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+    <h1 id="colorlib-logo"><a href="/"><span class="flaticon-camera"></span>SHS - 09 10</a></h1>
+    <nav id="colorlib-main-menu" role="navigation">
+        <ul>
+            <li class="colorlib-active"><a href="/">Home</a></li>
+            <li><a href="/shs/{{auth.user.name}}/gallery/">Gallery</a></li>
+            <li><a href="/shs/{{auth.user.name}}/blog">Blog</a></li>
+            <li><a href="/shs/{{auth.user.name}}/contact">Contact</a></li>
+            <li><a href="/shs/about">About</a></li>
+            <li><a style="color:red" href="/logout">Logout</a></li>
+            <li>
+                <select style="font-size: 15px; border-radius: 5px" class="form-control" id="selectAction">
+                    <option value=""><h6>Select Action</h6></option>
+                    <option value="todo"><h6>Todo</h6></option>
+                    <option value="developer">Developer</option>
+                    <option value="bug">Bug</option>
+                    <option value="profile">Profile</option>
+                </select>
+            </li>
+        </ul>
+       
+    </nav>
+
+  <!--  <div class="colorlib-footer">
+        <h3>Follow Us Here!</h3>
+        <div class="d-flex justify-content-center">
+            <ul class="d-flex align-items-center">
+                <li class="d-flex align-items-center jusitfy-content-center"><a href="#"><i class="icon-facebook"></i></a></li>
+                <li class="d-flex align-items-center jusitfy-content-center"><a href="#"><i class="icon-twitter"></i></a></li>
+                <li class="d-flex align-items-center jusitfy-content-center"><a href="#"><i class="icon-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div> -->
+</aside> <!-- END COLORLIB-ASIDE -->
+<div class="vl"></div>
+<script type="module" src="/custom/js/action.js"></script>

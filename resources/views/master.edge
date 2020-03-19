@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    @component('partials.head', {title})
+    @endcomponent 
+  <body class="">
+    <div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+          @component('partials.sidebar', {auth})
+          @endcomponent 
+       
+                <!-- Enter the content here -->
+                    @!section('content')
+            
+    </div>
+        @component('partials.footer')
+        @endcomponent
+  </body>
+</html>

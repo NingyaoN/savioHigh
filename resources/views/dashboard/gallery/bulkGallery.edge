@@ -1,0 +1,155 @@
+@layout('master')
+@section('content')
+@set('title', "Bulk Gallery")
+
+<style>
+    .flipper {
+			padding: 30px;
+			width: 100%;
+			height:400px;
+			position: relative;
+            background: #f5f5f5;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 5px;
+            transition: 0.6s;
+            transform-style: preserve-3d;
+			}
+			
+			.front, .back {
+			/*background-color: rgba(0,0,0,.3);*/
+			position: absolute;
+			padding:10px 30px;
+			top: 0;
+			left: 0;
+			right: 0;
+				
+				backface-visibility: hidden;
+			}
+			
+			.front{
+				z-index: 2;
+				/* for firefox 31 */
+				transform: rotateY(0deg);
+			}
+			
+			.back{
+				transform: rotateY(180deg);
+				height: 800px;
+			}
+			.flip{
+					transform: rotateY(180deg);
+			}
+			input{
+				width:100%;
+				margin-bottom:15px;
+				height:40px;
+				box-sizing: border-box;
+				padding:10px;
+			}
+			
+			.title{
+			text-align: center;
+			}
+			.flipbutton{
+				color:#4096ee;
+				text-decoration:none;
+				text-align:left !important;
+			}
+            
+            .front>img {
+                width: 100%;
+                height: 50%;
+                border-radius: 5px;
+            }
+			@media only screen and (max-width: 1100px) {
+				.flipper {
+                    width: 100%;
+                    height: 400px;
+
+				}    
+            }
+            .centered {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                }
+                #images  {
+                    width: 100%;
+                    height: 300px;
+                }
+</style>
+<div id="colorlib-main">
+    <section class="ftco-section bg-light ftco-bread">
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center">
+      <div class="col-md-9 ftco-animate">
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Bulk Gallery</span></p>
+        <h1 class="mb-3 bread">Bulk gallery - {{year}}</h1>
+        <input type="hidden" value={{auth.user.name}} id="name"/>
+        <input type="hidden" value={{auth.user.admin}} id="admin" />
+        <p>paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+      </div>
+    </div>
+        </div>
+    </section>
+<input type="hidden" value="{{count}}" id="thumbcount" />
+    <section class="ftco-section-2 mt-2">
+        <div class="photograhy">
+            <div class="row no-gutters appendRq">
+                @each(image in allImage)
+                <div class="col-sm-12  col-md-4 ftco-animate">
+                    <div class="flip-container">
+                    <div class=" flipper mb-5" id="flipper{{($loop.index + 1)}}">
+                        <div class="front">
+                            <img id = "images" src="{{image.photo_id}}"/>
+                            <div class="centered"><h1><span style="color:black">2020</span></h1></div>
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <button
+                                    onclick='flip("{{($loop.index + 1)}}");'
+                                    class="flipbutton btn btn-outline-danger btn-sm"  id="info"><i class="fas fa-forward"></i></button>
+                                    <a href="/shs/{{auth.user.name}}/image/detail/{{image._id}}" class="btn btn-sm btn-outline-danger" id="details">View Details</a>
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                        
+                        <div class="back">
+                            <h4 class="title"></h4>
+                           <b>Info not available at the moment</b>
+                            <a class="flipbutton btn btn-sm btn-outline-primary"
+                             onclick="back('{{($loop.index + 1)}}')"
+                             id="back{{($loop.index + 1)}}"><i class="fas fa-backward"></i></a>
+                        </div>
+                    </div>
+                
+                </div>
+                </div>
+                @endeach
+            </div>
+        </div>
+    </section>
+  
+
+
+    <script type="module" src="/custom/js/upload.js"></script>
+    <script>
+       function flip(idx) {
+           document.querySelector("#flipper"+idx).classList.toggle("flip");
+           e.preventDefault();
+           return false;
+       }
+       function back(idx, e) {
+    
+        document.querySelector("#flipper"+idx).classList.toggle("flip");
+        e.preventDefault();
+    //    return false;
+       }
+    </script>
+
+
+@endsection

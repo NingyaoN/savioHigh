@@ -1,0 +1,64 @@
+import React, {useState} from "react";
+import { Formik, Form, Field } from "formik";
+import { TextInput } from './TextInput'
+function validateEmail(value) {
+  let error;
+  
+  if (!value) {
+    error = "Required";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    error = "Invalid email address";
+  }
+  
+  return error;
+}
+
+function validateUsername(value) {
+  let error;
+  
+  if (value === "admin") {
+    error = "Nice try!";
+  }
+  
+  return error;
+}
+
+export const EditForm = (props) => {
+ 
+ 
+ 
+  const handleChange = (event) => {
+    [event.target.name] = event.target.value
+  }
+  const onSubmit = values => {
+    console.log(values);
+  };
+  
+
+  return (
+    <Formik
+      initialValues={{
+        name: props.profile.name,
+        email: ""
+      }}
+      onSubmit={onSubmit}
+    >
+      {({ errors, touched }) => (
+        <Form>
+          <input 
+            name="name"
+            defaultValue={props.profile.name}
+            onChange={handleChange}
+          />  
+           <input 
+            name="email"
+            defaultValue={props.profile.email}
+            onChange={handleChange}
+          />  
+          {errors.email && touched.email && errors.email}
+          <button type="submit">Submit</button>
+        </Form>
+      )}
+    </Formik>
+  );
+};

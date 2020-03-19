@@ -1,0 +1,80 @@
+<style>
+  .col {
+    color: #8c150d;
+  }
+</style>
+
+<div class="logo">
+  
+ @if(auth.user)
+  <a href="/shs/{{auth.user.name}}">SHS<sup style="font-size: 10px; color: red">2010</sup></a> <br />
+  @else
+  <a href="/">SHS<sup style="font-size: 10px; color: red">2010</sup></a> <br />
+  @endif
+  <header >
+    <nav style="border: 1px solid  red">
+       <ul class="nav inline-items">
+         @if(auth.user)
+         <li>
+          <button style = "cursor: pointer; font-size: 20px; color: red;" id="logout" class="header-btn">
+            <span class="col"><b>LOGOUT</b></span>
+          </button> 
+         </li>
+         <li>
+
+          <button  style = "cursor: pointer; font-size: 15px; color: #144196;"  class="header-btn" id="bug-report">
+            <span class="col"><b>REPORT BUG</b></span>
+          </button>  
+         </li>
+         <li>
+          <button  style = "cursor: pointer; font-size: 15px; color: #144196;"  class="header-btn" id="upload">
+            <span class="col"><b> UPLOAD IMAGE </b></span>
+          </button>  
+         </li>
+         <li>
+          <button  style = "cursor: pointer; font-size: 15px; color: #144196;"  class="header-btn" id="blog">
+            <span class="col"><b>CREATE BLOG</b></span>
+          </button>
+         </li>
+         <br />
+         <br />
+         
+         <li>
+          <button style="cursor: pointer; font-size: 15px; color: #144196;" class="header-btn" id="donate"><b>DONATE</b></button>
+         </li>
+         
+         @if(auth.user.admin)
+          <li>
+            <button  style = "cursor: pointer; font-size: 15px; color: #144196;"  class="header-btn" id="bug">
+            <span class="col"><span style="color: blue">*</span><b>BUGS</b></span></button>
+          </li>
+         
+            <input type="hidden" id="name" value={{auth.user.name}}>
+            
+          
+          
+              <input type="hidden" id="user_type" value = {{auth.user.type}}>
+          
+          
+          <li>
+            <button style="cursor: pointer; font-size: 15px; color: #144196;" class="header-btn" id="developer">DEVELOPER</button>
+          </li>
+         @endif  
+         @else
+
+         <li>
+           
+  <button style="cursor: pointer; font-size: 15px; color: red;" class="header-btn" id="request"><b>REQUEST</b></button> 
+         </li>
+         <li>
+          <button style="cursor: pointer; font-size: 10px; color: #144196;" class="header-btn" id="privacy">PRIVACY & GDPR POLICY</button>
+        </li>
+      </ul>
+   </nav>
+ </header>
+@endif
+</div>
+<script src="/dashboard/bower_components/jquery/dist/jquery.js"></script>
+<script type="module" src="/dashboard/custom/js/dashboard.js"></script>
+ {{script('/dashboard/custom/js/header.js')}}
+

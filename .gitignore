@@ -1,0 +1,24 @@
+# Node modules
+node_modules
+
+# Adonis directory for storing tmp files
+tmp
+# Environment variables, never commit this file
+.env
+# The development sqlite file
+database/development.sqlite
+adonis.sqlite
+serverconfig.md
+.DS_Store
+Documents
+Documents.pub
+
+package-lock.json
+
+yarn-error.log
+.gitignore.txt
+node_modules
+
+*.csv
+steps
+sharedemail

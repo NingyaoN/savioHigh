@@ -1,0 +1,21 @@
+@layout('master')
+@section('content')
+@set('title', 'Home')
+<div id="colorlib-main">
+<section class="ftco-section-2">
+	<div class="photograhy">
+		<div class="row no-gutters">
+			@each(image in images)
+			<div class="col-md-4 ftco-animate">
+				<a href="{{image.photo_id}}" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url({{image.photo_id}});">
+					<div class="overlay"></div>
+					<div class="text text-center">
+						<h3>{{image.year}}</h3>
+					</div>
+				</a>
+			</div>
+			@endeach
+		</div>
+	</div>
+</section>
+@endsection

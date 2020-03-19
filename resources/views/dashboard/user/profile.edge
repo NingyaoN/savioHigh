@@ -1,0 +1,202 @@
+@layout('master')
+@section('content')
+
+<style>
+    .center {
+        height: auto;
+        width: 100%;
+        margin-top: 20px;
+        position: relative;
+        /* border: 1px solid black;  */
+    }
+    .vl {
+        border-bottom: 1px solid blue;
+        height: auto;
+    }
+    .profile_avatar {
+      
+        text-align: center;
+    }
+    .editProfile {
+       margin: 10px 100px 10px 100px;
+    }
+    .editProfile, input {
+        border-radius:  5px;
+    }
+
+    .post>select {
+        border-radius: 5px;
+    }
+@media only screen and (max-width: 600px) {
+    .editProfile {
+       margin-bottom: 10px;
+       margin-top: 50px;
+       margin-right: 0;
+       margin-left: 0;
+    }
+    
+}
+
+			.flipper {
+			padding: 30px;
+			width: 400px;
+			height:380px;
+			position: relative;
+            background: #f5f5f5;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 5px;
+            
+            transition: 0.6s;
+            transform-style: preserve-3d;
+			}
+			
+			.front, .back {
+			/*background-color: rgba(0,0,0,.3);*/
+			position: absolute;
+			padding:10px 30px;
+			top: 0;
+			left: 0;
+			right: 0;
+				
+				backface-visibility: hidden;
+			}
+			
+			.front{
+				z-index: 2;
+				/* for firefox 31 */
+				transform: rotateY(0deg);
+			}
+			
+			.back{
+				transform: rotateY(180deg);
+				height: 800px;
+			}
+			.flip{
+					transform: rotateY(180deg);
+			}
+			input{
+				width:100%;
+				margin-bottom:15px;
+				height:40px;
+				box-sizing: border-box;
+				padding:10px;
+			}
+			
+			.title{
+			text-align: center;
+			}
+			.flipbutton{
+				color:#4096ee;
+				text-decoration:none;
+				text-align:left !important;
+			}
+            
+            .front>img {
+                width: 100%;
+                height: 55%;
+                border-radius: 5px;
+            }
+			@media only screen and (max-width: 800px) {
+				.flipper {
+                    width: 100%;
+                    height: 300px;
+
+				}
+            }
+            ul {
+                list-style-type: none;
+            }
+
+            .images  {
+                    width: 100%;
+                    height: 300px;
+                }
+            
+</style>
+@set('title', 'Profile')
+<div id="colorlib-main">
+    <section class="ftco-section-2">
+        <div class="photograhy">
+            <div class="row no-gutters">
+                <div class="center">
+                    <div class="row profile">
+                        <div class="col-sm-12 ">
+                           <div class="profile_avatar">
+                            <figure class="avatar avatar-xl">
+                                <img src="/images/image_1.jpg" alt="...">
+                                <i class="avatar-presence online"></i>
+                              </figure>
+                              <p><i>{{user.name}}</p>
+                                <input type="hidden" id="userName" value="{{user.name}}" />
+                                
+                              <br />
+                             
+                              <button class="btn btn-error s-circle" id="edit"><i class="icon icon-edit"></i></button>
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              <button class="btn btn-error s-circle"><i class="icon icon-delete"></i></button>
+                                         
+                           </div>
+                        </div>
+                    </div>
+                        <br />
+                        <div class="vl"></div>
+                        <br />
+                       <div class="row post">
+                        <div class="col-sm-12 ">
+                      <!--      <select class="form-control" id='selectAct'>
+                                 <option value="image">YOUR IMAGES</option>
+                                 <option value="blog">YOUR BLOG</option>
+                            </select> -->
+                         </div>
+                       </div>
+                      <!--  <div class="vl"></div> -->
+                      <div class="row editProfile">
+                        <div class="col-sm-12 col-lg-10 editProfile">
+                            <button class="cancel btn btn-error btn-sm"><i class="icon icon-back"></i></button></h6> 
+                            <br />
+                            <br />
+                            <h6><u>Edit profile</u> 
+                                <br />
+                                <br />
+                            Name <input class="form-control" type="text" value="{{user.name}}" id="editName" />
+                            <br />
+                            Email <input class="form-control" type="text" value="{{user.email}}" id="email" />
+                            <br />
+                            Phone <input class="form-control" type="text" value="{{user.phone || ""}}" id="phone" />
+                            <br />
+                            Bio <input class="form-control" type="text" value="{{user.bio || ""}}" id="bio" />
+                            <br />
+                            <button class=" btn btn-sm btn-danger" id="saveChanges">Save Changes</button>
+                            <button class=" btn btn-sm btn-danger cancel float-right" id="cancel">Cancel</button>
+                        </div>
+                        
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </section>
+    <section class="ftco-section-2 postSectoin">
+        <div class="photograhy">
+            <div class="err">
+
+            </div>
+            <div class="row no-gutters appendRq">  
+                <div class="err">
+
+                </div>
+            </div>
+        </div>
+    </section>
+  
+    <script src="/js/jquery.min.js"></script>
+    <script type="module" src="/custom/js/editProfile.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    
+<script>
+   
+</script>
+@endsection

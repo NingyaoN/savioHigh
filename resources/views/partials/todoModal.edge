@@ -1,0 +1,67 @@
+<style>
+ 
+    .floatMe{
+        position:fixed;
+        width:60px;
+        height:60px;
+        right:40px;
+        background-color:black;
+        color:yellowgreen;
+        border-radius:50px;
+        text-align:center;
+        box-shadow: 2px 2px 3px #999;
+    }
+    
+    .my-float{
+    
+    }
+      </style>
+    
+  <!-- Large modal -->
+<button type="button" class="btn btn-primary floatMe" data-toggle="modal" data-target=".bd-example-modal-lg1">
+  <i class="fa fa-plus my-float"></i>
+
+</button>
+<div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Todo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+        <form method="" action="" enctype="multipart/form-data" >
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Date</label>
+                    <input type="date" class="form-control" id="todo-date" />
+                </div>
+                <div class="col-sm-6">
+                    <label>Date</label>
+                    <input type="time" class="form-control" id="todo-time" />
+                </div>
+                <div class="col-sm-6">
+                    <label>About</label>
+                    <input type="text" class="form-control" id="todo-about" />
+                </div>
+                <div class="col-sm-6">
+                    <label>Place | Venue</label>
+                    <input type="text" class="form-control" id="todo-venue" />
+                </div>
+                <div class="col-sm-12">
+                    <label for="desc">Description</label>
+                    <input type="text" class="form-control" value="" id="description"/>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger pull-left"  data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-sm btn-success" id="add">POST</button>
+      </div>
+    </div>
+  </div>
+</div>

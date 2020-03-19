@@ -1,0 +1,263 @@
+@layout('master')
+@section('content')
+@set('title', 'Blog Single View')
+<div id="colorlib-main">
+    <section class="ftco-section bg-light ftco-bread">
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center">
+      <div class="col-md-9 ftco-animate">
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="blog.html">Blog</a></span> <span>Blog Single</span></p>
+        <h1 class="mb-3 bread">Blog Single</h1>
+      </div>
+    </div>
+        </div>
+    </section>
+    <section class="ftco-section">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8 ftco-animate">
+        <h2 class="mb-3 font-weight-bold">{{userBlog.title}}</h2>
+        
+        <p>
+          <img src="{{userBlog.photo_id}}" alt="" class="img-fluid">
+        </p>
+        <p>{{userBlog.desc}}</p>
+        <div class="tag-widget post-tag-container mb-5 mt-5">
+          <div class="tagcloud">
+            <a href="#" class="tag-cloud-link">{{userBlog.about}}</a>
+          </div>
+        </div>
+        
+        <div class="about-author d-flex p-4 bg-light">
+          <div class="bio mr-5">
+            <figure class="avatar avatar-xl">
+               
+              </figure>
+          </div>
+          <div class="desc">
+            <h3>{{userDetail.name}}</h3>
+            <p>{{userDetail.about || "Not Mention"}}</p>
+          </div>
+        </div>
+
+
+        <div class="pt-5 mt-5">
+          <h3 class="mb-5 font-weight-bold"><span id="count">{{count}}</span> Comment(s)</h3>
+          @each(comment in userBlog.comments)
+          <ul class="comment-list">
+            <li class="comment">
+              <div class="vcard bio">
+                <img src="/images/person_1.jpg" alt="Image placeholder">
+              </div>
+              <div class="comment-body">
+                <h3>{{comment.commentor.name}}</h3>
+                <div class="meta">{{comment.date}}</div>
+                <p>{{comment.comment}}</p>
+                <p><input type="button" onclick="registerFunc('{{($loop.index + 1)}}');" data-index="{{($loop.index + 1)}}" class="replyBtn{{($loop.index + 1)}} btn btn-sm btn-default"  value="Reply"/></p>
+                <div class="replySection{{($loop.index + 1)}} form-group">
+                  <textarea name="" id="reply-message{{($loop.index + 1)}}" cols="40" rows="5" class="form-control"></textarea><br />
+                  <input type="button" 
+                  class="btn btn-sm btn-default" 
+                  onclick="replyComment('{{($loop.index + 1)}}', '{{comment.commentID}}')" 
+                  value="Reply">
+                  <input type="button" class="btn btn-sm btn-error float-right" 
+                  onclick="cancelReply('{{($loop.index + 1)}}'); " value="Cancel">
+                </div>
+              </div>
+              @each(reply in comment.reply)
+              <ul class="children">
+                <li class="comment">
+                  <div class="vcard bio">
+                    <div class="vcard bio">
+                      <img src="/images/person_1.jpg" alt="Image placeholder">
+                    </div>
+                  </div>
+                  <div class="comment-body">
+                    <h3>{{reply.replier.name}}</h3>
+                    <div class="meta">{{reply.date}}</div>
+                    <p>{{reply.msg}}</p>
+                  </div>
+                </li>
+              </ul>
+              @endeach
+            </li>
+          </ul>
+          @endeach
+          <!-- END comment-list -->
+          
+          <div class="comment-form-wrap pt-5">
+            <h3 class="mb-5">Leave a comment</h3>
+            <form action="#" class="p-3 p-md-4 bg-light">
+                <div class="form-group">
+                  <textarea name="" id="message" cols="40" rows="10" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="button" class="btn btn-default float-right" id="comment" value="Post Comment">
+                </div>
+              </form>
+          </div>
+        </div>
+      </div> <!-- .col-md-8 -->
+            <div class="col-lg-4 sidebar ftco-animate bg-light">
+        <div class="sidebar-box">
+          <form action="#" class="search-form">
+            <div class="form-group">
+              <span class="icon icon-search"></span>
+              <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+            </div>
+          </form>
+        </div>
+        <div class="sidebar-box ftco-animate">
+            <h3 class="sidebar-heading">Categories</h3>
+          <ul class="categories">
+            <li><a href="#">Fashion <span>(6)</span></a></li>
+            <li><a href="#">Technology <span>(8)</span></a></li>
+            <li><a href="#">Travel <span>(2)</span></a></li>
+            <li><a href="#">Food <span>(2)</span></a></li>
+            <li><a href="#">Photography <span>(7)</span></a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-box ftco-animate">
+          <h3 class="sidebar-heading">Popular Articles</h3>
+          <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" style="background-image: url(/images/image_1.jpg);"></a>
+            <div class="text">
+              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
+                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" style="background-image: url(/images/image_2.jpg);"></a>
+            <div class="text">
+              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
+                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" style="background-image: url(/images/image_3.jpg);"></a>
+            <div class="text">
+              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
+                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-box ftco-animate">
+          <h3 class="sidebar-heading">Tag Cloud</h3>
+          <ul class="tagcloud">
+            <a href="#" class="tag-cloud-link">animals</a>
+            <a href="#" class="tag-cloud-link">human</a>
+            <a href="#" class="tag-cloud-link">people</a>
+            <a href="#" class="tag-cloud-link">cat</a>
+            <a href="#" class="tag-cloud-link">dog</a>
+            <a href="#" class="tag-cloud-link">nature</a>
+            <a href="#" class="tag-cloud-link">leaves</a>
+            <a href="#" class="tag-cloud-link">food</a>
+          </ul>
+        </div>
+        <div class="sidebar-box ftco-animate">
+            <h3 class="sidebar-heading">Archives</h3>
+          <ul class="categories">
+              <li><a href="#">October 2018 <span>(10)</span></a></li>
+            <li><a href="#">September 2018 <span>(6)</span></a></li>
+            <li><a href="#">August 2018 <span>(8)</span></a></li>
+            <li><a href="#">July 2018 <span>(2)</span></a></li>
+            <li><a href="#">June 2018 <span>(7)</span></a></li>
+            <li><a href="#">May 2018 <span>(5)</span></a></li>
+          </ul>
+        </div>
+      </div><!-- END COL -->
+        </div>
+    </div>
+</section>
+<input type="text" id="ID" value={{ID}} />
+<input type="text"  id="blogID" value={{blogID}}>
+{{script('/assets/js/jquery-3.2.1.min.js')}}
+{{script('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js')}}
+<script type="module" src="/custom/js/comment.js"></script>
+<script>
+ $(document).ready(() => {
+  let count = $("#count").text();
+      for(let i=1;i<=count; i++) {
+        $(".replySection"+i).hide()
+        console.log(i)
+      }
+ })
+    function registerFunc(index) {
+      $(".replySection"+index).toggle();
+      $(".replyBtn"+index).hide();
+    }
+    function cancelReply(index) {
+      $(".replySection"+index).hide();
+      $(".replyBtn"+index).show();
+    }
+  
+  
+  
+  
+   function Toast(type, css, msg, duration) {
+      this.type = type;
+      this.css = css;
+      this.msg = msg;
+      this.duration = duration;
+  }
+  toastr.options.positionClass = 'toast-top-full-width';
+  toastr.options.extendedTimeOut = 0; //1000;
+  toastr.options.timeOut = 500;
+  toastr.options.showDuration = 2000;
+  toastr.options.fadeOut = 100;
+  toastr.options.fadeIn = 100;
+  toastr.options.progressBar = true;
+  var i = 0;
+  
+  $('#tryMe').click(function () {
+      $('#tryMe').prop('disabled', true);
+      delayToasts();
+  });
+  
+   function showToast(error, msg ,pos, duration) {
+      toastr.options.positionClass = pos;
+      toastr.options.showDuration = duration;
+      toastr.options.progressBar = true;
+      new Toast(error, pos, msg);
+      toastr[error](msg);
+  }
+  
+  
+  
+    function replyComment(index, commentID) {
+      const ID =$('#ID').val();
+      const blogID = $("#blogID").val();
+      const replyMsg = $("#reply-message"+index).val();
+      console.log(ID, blogID, commentID)
+      $.ajax({
+        url: "/comment/reply/"+ID+"/"+blogID+"/"+commentID,
+        type: "put",
+        data: {replyMsg},
+        success: (data) => {
+          showToast("success", data.msg, "toast-top-center", 1500);
+          setTimeout(() => {
+              location.reload();
+          }, 1500)
+        },
+        error: (err) => {
+  
+        }
+      })
+  }
+  </script>
+  
+@endsection

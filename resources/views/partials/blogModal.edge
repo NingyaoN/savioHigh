@@ -1,0 +1,67 @@
+<style>
+ 
+    .floatMe{
+        position:fixed;
+        width:60px;
+        height:60px;
+        right:40px;
+        background-color:black;
+        color:yellowgreen;
+        border-radius:50px;
+        text-align:center;
+        box-shadow: 2px 2px 3px #999;
+    }
+    
+    .my-float{
+    
+    }
+      </style>
+    
+  <!-- Large modal -->
+<button type="button" class="btn btn-primary floatMe" data-toggle="modal" data-target=".bd-example-modal-lg">
+  <i class="fa fa-plus my-float"></i>
+
+</button>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-12">
+          <form method="" action="" enctype="multipart/form-data" >
+              <label class="title">Create a new post</label>
+          <br />
+              <label>Title</label>
+              <input type="text" id="title" class="form-control" />
+              <br />
+              <label>About</label>
+              <input type="text" id="about" class="form-control" />
+              <br />
+              <label>Upload Thumbnail</label><br />
+              <input type="file" id="file" class="form-control" />
+              <br />
+              <input type="button" class="btn btn-sm btn-primary" value="Upload" id="image_upload">
+              <br/>
+              <br/>
+
+              <label for="desc">Description
+              </label>
+              <a href="#" style="color: blue" data-toggle="popover" title="Content" data-content="Content of your blog (not more that 5000 words.)">(?)</a>
+              <textarea class="form-control rounded-2" id="desc" rows=5>
+              </textarea>
+              <br />
+          </form>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger float-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-sm btn-success" id="upload">POST</button>
+      </div>
+    </div>
+  </div>
+</div>

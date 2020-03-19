@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SHS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="/assets/css/bootstrap.min.css/" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet">
+   
+		<style>
+			.flip-container {
+				margin-top: 100px;
+				perspective: 500;
+			}
+			.flipper {
+			padding: 30px;
+			width: 500px;
+			height:500px;
+			position: relative;
+				background: #f5f5f5;
+				-webkit-border-radius: 20px;
+				-moz-border-radius: 20px;
+				border-radius: 20px;
+				
+				transition: 0.6s;
+				transform-style: preserve-3d;
+			}
+			
+			.front, .back {
+			/*background-color: rgba(0,0,0,.3);*/
+			position: absolute;
+				padding:10px 30px;
+			top: 0;
+			left: 0;
+			right: 0;
+				
+				backface-visibility: hidden;
+			}
+			
+			.front{
+				z-index: 2;
+				/* for firefox 31 */
+				transform: rotateY(0deg);
+			}
+			
+			.back{
+				transform: rotateY(180deg);
+				height: 800px;
+			}
+			.flip{
+					transform: rotateY(180deg);
+			}
+			input{
+				width:100%;
+				margin-bottom:15px;
+				height:40px;
+				box-sizing: border-box;
+				padding:10px;
+			}
+			
+			.title{
+			text-align: center;
+			}
+			.flipbutton{
+				color:#4096ee;
+				text-decoration:none;
+				text-align:left !important;
+			}
+			
+			@media only screen and (max-width: 600px) {
+				.flipper {
+					width: 100%;
+
+				}
+			}
+			
+			/* Alignment styles */
+			
+
+			
+			
+			</style>
+	
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section class="intro">
+						<header>
+							<h1>SHS 09-10</h1>
+							<p><i><u>Let your light shine.</u></i></p>
+							<ul class="actions">
+								<li><a href="#first" class="arrow scrolly"><span class="label">Next</span></a></li>
+							</ul>
+						</header>
+						<div class="content">
+												
+							<div class="flip-container">
+								<div class="flipper" id="flipper">
+									<div class="front">
+										<h4 class="title"><b>Login</b></h4>
+										<form method="post"  action="/shs/user/login">
+													<input type="text" name="email" placeholder="Username" />
+													<input type="password" name="password" placeholder="Password" />
+													<input type="submit" value="Login"/>
+										</form>
+										<a class="flipbutton" id="loginButton" href="#">Create my account →</a>
+									</div>
+									
+									<div class="back">
+										<h4 class="title">Create New Account</h4>
+										<form>
+												<input type="text" name="regname" id="regname" class="form-control" placeholder="Name" />
+												<input type="email" name="regemail" id="regemail" placeholder="Email" />
+												<input type="text" name="regpassword" id="regpassword" placeholder="Password" />
+												<input type="password" name="c_password" id="c_password" placeholder="Confirm Password" />
+												<input type="button" id="register" value="Sign up"/>
+										</form>
+										<a class="flipbutton" id="registerButton" href="#">Login to my account →</a>
+									</div>
+								</div>
+							</div>
+		
+						</div>
+					</section>
+
+				<!-- Section -->
+					<section id="first">
+						<header>
+							<h2>About this page.</h2>
+						</header>
+						<div class="content">
+							<p><strong>Lorem ipsum dolor</strong> sit amet consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor amet fermentum. Nullam venenatis erat id vehicula ultrices sed ultricies condimentum. Magna sed etiam consequat, et lorem adipiscing sed nulla. Volutpat nisl et tempus et dolor libero, feugiat magna tempus, sed et lorem adipiscing.</p>
+							<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+						</div>
+					</section>
+
+				<!-- Section -->
+					<section>
+						<header>
+							<h2>Services</h2>
+						</header>
+						<div class="content">
+							<p><strong>Actions and Services:-</strong>.</p>
+							<ul class="feature-icons">
+								<li class="icon solid fa-laptop">Create Your own Handle</li>
+								<li class="icon solid fa-bolt">Read what they have shared</li>
+								<li class="icon solid fa-signal">Share your thougts</li>
+								<li class="icon solid fa-cog">Share your memories</li>
+								<li class="icon solid fa-map-marker-alt">Explore others' memories.</li>
+								<li class="icon solid fa-code">Access Yearly TODOS and notification.</li>
+							</ul>
+							<p>The App is still in CI/CD. The aforementioned features will evolve with time.</p>
+						</div>
+					</section>
+
+				<!-- Section -->
+					<section>
+						<header>
+							<h2>Recent Photos</h2>
+						</header>
+						<div class="content">
+							<p><strong>Recent photos: </strong> A taste of other's memories.</p>
+
+							<!-- Section -->
+								<section>
+									<header>
+										<h3>Images</h3>
+										<p></p>
+									</header>
+									<div class="content">
+										<div class="gallery">
+											<a href="images/gallery/fulls/01.jpg" class="landscape"><img src="images/gallery/thumbs/01.jpg" alt="" /></a>
+											<a href="images/gallery/fulls/02.jpg"><img src="images/gallery/thumbs/02.jpg" alt="" /></a>
+											<a href="images/gallery/fulls/03.jpg"><img src="images/gallery/thumbs/03.jpg" alt="" /></a>
+											<a href="images/gallery/fulls/04.jpg" class="landscape"><img src="images/gallery/thumbs/04.jpg" alt="" /></a>
+										</div>
+									</div>
+								</section>
+						</div>
+					</section>
+
+				<!-- Section -->
+					<section>
+						<header>
+							<h2>GETTING STARTED</h2>
+						</header>
+						<div class="content">
+							<p><strong>Instruction and Guidelines</strong></p>
+							<ul class="actions">
+								<li><a href="#" class="button primary large">Get Started</a></li>
+								<li>
+									<a href="#" class="button large">Privacy and more...</a>
+								</li>
+							</ul>
+						</div>
+					</section>
+				<!-- Section -->
+					<section>
+						<header>
+							<h2>Get in touch</h2>
+						</header>
+						<div class="content">
+							<p><strong>Send your queries</strong> to the front runner and executives.</p>
+							<form>
+								<div class="fields">
+									<div class="field half">
+										<input type="text" name="name" id="name" placeholder="Name" />
+									</div>
+									<div class="field half">
+										<input type="email" name="email" id="email" placeholder="Email" />
+									</div>
+									<div class="field">
+										<textarea name="message" id="message" placeholder="Message" rows="7"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" class="button primary" /></li>
+								</ul>
+							</form>
+						</div>
+						<footer>
+							<ul class="items">
+								<li>
+									<h3>Email</h3>
+									<a href="#">saviohigh10@gmail.com</a>
+								</li>
+								<li>
+									<h3>Phone</h3>
+									<a href="#">(000) 000-0000</a>
+								</li>
+								<li>
+									<h3>Address</h3>
+									<span>Ukhrul, Manipur - 795142</span>
+								</li>
+								<li>
+									<h3>Elsewhere</h3>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+										<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="#" class="icon brands fa-codepen"><span class="label">Codepen</span></a></li>
+									</ul>
+								</li>
+							</ul>
+						</footer>
+					</section>
+
+				<!-- Copyright -->
+					<div class="copyright">All rights reserved @ shs2010</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery-3.2.1.min.js"></script>
+			<script src="/assets/js/bootstrap.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/custom/js/main.js"></script>
+			{{script('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js')}}
+			<script type="module" src="/custom/js/register.js"></script>
+			<script>
+				var loginButton = document.getElementById("loginButton");
+				var registerButton = document.getElementById("registerButton");
+				
+				loginButton.onclick = function(){
+					document.querySelector("#flipper").classList.toggle("flip");
+					return false;
+				}
+				
+				registerButton.onclick = function(){
+					document.querySelector("#flipper").classList.toggle("flip");
+					return false;
+				}
+			</script>
+		
+	</body>
+</html>

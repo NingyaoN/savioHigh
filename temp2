@@ -1,0 +1,70 @@
+import React, { Fragment, useState, useEffect, useReducer } from 'react';
+import { useForm } from "react-hook-form";
+import { TextInput } from './TextInput';
+
+
+function reducer(state, { field, value }) {
+    return {
+        ...state,
+        [field]: value,
+    }
+}
+export function EditForm(props) {
+    const initialValues = {
+        name: props.profile.name,
+        email: props.profile.email,
+        phone: props.profile.phone,
+        status: props.profile.status,
+        password: props.profile.password,
+    }
+    console.log(props)
+    const [state, dispatch] = useReducer(reducer, initialValues)
+    const onChange = (e) => {
+        dispatch({ field: e.target.name, value: e.target.value });
+    }
+
+    
+    const onSubmit = () => {
+      //  console.log(initialValues)
+        console.log(state)
+    }
+    const { name, email, phone, password, status, } = state;
+    return (
+        <Fragment>
+            <div className="row">
+
+                <TextInput
+                    name="name"
+                    defaultValue={initialValues.name}
+                    onChange={onChange}
+                    value={name}
+                />
+
+                <TextInput
+                    name="email"
+                    onChange={onChange}
+                    defaultValue={initialValues.email} />
+                    value={email}
+                <TextInput
+                    name="phone"
+                    onChange={onChange}
+                    defaultValue={initialValues.phone} />
+                <TextInput
+                    name="status"
+                    onChange={onChange}
+                    defaultValue={initialValues.status} />
+                <TextInput
+                    name="password"
+                    onChange={onChange}
+                    defaultValue={initialValues.password} />
+
+                <button className="btn btn-sm btn-outline-danger float-left">Cancel</button> &nbsp;
+                    <button className="btn btn-sm btn-outline-success float-right" onClick={onSubmit}>Save Changes</button>
+
+            </div>
+
+
+
+        </Fragment>
+    )
+}

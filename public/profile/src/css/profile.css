@@ -1,0 +1,18 @@
+
+@media (prefers-reduced-motion: no-preference) {
+    .avatar {
+      animation: avatar  5s linear;
+      animation-duration: 10s;
+    }
+  }
+  
+
+@keyframes avatar {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -1,0 +1,20 @@
+{
+  "host": "127.0.0.1",
+  "port": 6379,
+
+  // required string
+  //"name": "my_queue",
+
+  // host display name, give it a helpful name for reference
+  // required string
+  "hostId": "testing",
+
+  // optional string
+  // default: null (will assume Bull)
+  "type": "bee",
+
+  // queue keys prefix
+  // optional string
+  // default: "bq" for Bee, "bull" for Bull
+  "prefix": "bq"
+}

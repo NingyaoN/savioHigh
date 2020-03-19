@@ -1,0 +1,238 @@
+@layout('master')
+@section('content')
+@set('title', 'Image Details')
+<style>
+    .like-content {
+      display: inline-block;
+      width: 100%;
+      margin: 40px 0 0;
+      padding: 40px 0 0;
+      font-size: 18px;
+      border-top: 10px dashed #eee;
+      border: 1px solid red;
+      /* text-align: center; */
+  }
+  .like-content span {
+      color: #9d9da4;
+      font-family: monospace;
+  }
+  .like-content .btn-secondary {
+        display: block;
+        margin: 40px auto 0px;
+      text-align: center;
+      background: #ed2553;
+      border-radius: 3px;
+      box-shadow: 0 10px 20px -8px rgb(240, 75, 113);
+      padding: 10px 17px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      text-decoration: none;
+      -webkit-transition: 0.3s ease;
+      transition: 0.3s ease;
+  }
+  .like-content .btn-secondary:hover {
+        transform: translateY(-3px);
+  }
+  .like-content .btn-secondary .fa {
+        margin-right: 5px;
+  }
+  .animate-like {
+      animation-name: likeAnimation;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-duration: 0.65s;
+  }
+  @keyframes likeAnimation {
+    0%   { transform: scale(30); }
+    100% { transform: scale(1); }
+  }  
+
+  img {
+        position: relative;
+        width: 50%;
+      
+  }
+  p {
+      font-size: 10px;
+  }
+  </style>
+  
+  <div id="colorlib-main">
+  <div class="like-content col-sm-12">   
+    <div class="row">
+            <div class="col-sm-12">
+                <section class="ftco-section-2">
+                    <div class="photograhy">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 ftco-animate">
+                                
+                            </div>
+                            <div class="col-md-4 ftco-animate">
+                                <a href="{{image.photo_id}}" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url({{image.photo_id}}); ">
+                                    <div class="overlay"></div>
+                                    <div class="text text-center">
+                                    <h3><i style="color:red" class="far fa-heart"></i> {{likeCount || 0}}</h3>
+                                        <h3 class="tag"><i style="color:red" class="far fa-comment"></i><span id="commentCount" >{{commentCount || 0}} </span></h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+    </div>
+    <input type="hidden" id="imageID" value="{{image._id}}" />
+    <input type="hidden" id="liked" value="{{liked}}" />
+    <button class="btn-secondary like-review">
+      <i class="fa fa-heart" aria-hidden="true"></i> 
+      @if(liked) 
+        Liked 
+      @else 
+        Like 
+    @endif
+    </button>
+    <div class="comment">
+        <div class="row">
+            <div class="col-sm-6 mb-5">
+                <label class="float-left">Leave a comment </label>
+                <textarea id="desc" class="form-control"></textarea>
+                <button class="btn btn-primary btn-outline-primary btn-sm float-right mt-3" id="comment">Submit</button>
+                <button class="btn btn-danger btn-outline-danger btn-sm mt-3">Cancel</button>
+            </div>
+            <div style="border-left: 1px solid red;"></div>
+            <div class="col-sm-5">
+                <div class="pt-5">
+                <h3 class=" font-weight-bold">{{commentCount || 0}} Comments</h3>
+                @each(comment in image.comments)
+                <ul class="comment-list">
+                  <li class="comment">
+                    <div class="vcard bio">
+                      <img src="images/person_1.jpg" alt="">
+                    </div>
+                    <div class="comment-body">
+                      <h5>{{comment.commentor_details.name}}</h5>
+                      <div class="meta">{{comment.date}}</div>
+                      <p>{{comment.comment}}</p>
+                      <p><button 
+                        onclick="registerFunc('{{($loop.index + 1)}}');" data-index="{{($loop.index + 1)}}" 
+                        class=" replyBtn{{($loop.index + 1)}} btn btn-sm btn-outline-success btn-sm replyBtn ">Reply</button></p>
+                      <div class="replySection{{($loop.index + 1)}} col-sm-12 rep">
+                            
+                        <textarea  id="reply-message{{($loop.index + 1)}}" class="form-control"></textarea>
+                        <button 
+                        onclick="replyComment('{{($loop.index + 1)}}', '{{comment.commentID}}')" 
+                        class="btn btn-outline-primary btn-sm float-right mt-3 replied "  >Reply</button>
+                        <button 
+                        onclick="cancelReply('{{($loop.index + 1)}}'); "
+                        class="btn btn-danger btn-outline-danger btn-sm mt-3 cancelBtn">Cancel</button>
+                    </div>
+                    </div>
+                    @each(reply in comment.replies)
+                    <ul class="children">
+                      <li class="comment">
+                        <div class="vcard bio">
+                          <img src="images/person_1.jpg" alt="">
+                        </div>
+                        <div class="comment-body">
+                          <h5>{{reply.replier_details.name}}</h5>
+                          <div class="meta">{{reply.date}}</div>
+                          <p>{{reply.reply}}</p>
+                        </div>
+                          </li>
+                        </ul>
+                        @endeach
+                      </li>
+                    </ul>
+                    @endeach
+                  </li>
+                <!-- END comment-list -->
+              </div>
+            </div>
+        </div>
+       
+       
+    </div>
+  </div>
+  <script src="/js/jquery.min.js"></script>
+  <script type="module" src="/custom/js/gallery.js"></script>
+  <script>
+      
+      $(document).ready(() => {
+    let count = $("#commentCount").text();
+    console.log(count)
+    let i=1;
+    for(i;i<=count; i++) 
+    $(".replySection"+i).hide()
+  })
+
+
+
+
+  function registerFunc(index) {
+    $(".replySection"+index).toggle();
+    $(".replyBtn"+index).hide();
+  }
+  function cancelReply(index) {
+    $(".replySection"+index).hide();
+    $(".replyBtn"+index).show();
+  }
+
+
+
+
+ function Toast(type, css, msg, duration) {
+    this.type = type;
+    this.css = css;
+    this.msg = msg;
+    this.duration = duration;
+}
+toastr.options.positionClass = 'toast-top-full-width';
+toastr.options.extendedTimeOut = 0; //1000;
+toastr.options.timeOut = 500;
+toastr.options.showDuration = 2000;
+toastr.options.fadeOut = 100;
+toastr.options.fadeIn = 100;
+toastr.options.progressBar = true;
+var i = 0;
+
+$('#tryMe').click(function () {
+    $('#tryMe').prop('disabled', true);
+    delayToasts();
+});
+
+ function showToast(error, msg ,pos, duration) {
+    toastr.options.positionClass = pos;
+    toastr.options.showDuration = duration;
+    toastr.options.progressBar = true;
+    new Toast(error, pos, msg);
+    toastr[error](msg);
+}
+
+
+
+  function replyComment(index, commentID) {
+    showToast("info", "Replying....", "toast-top-center", 1500);
+    const imageID = $("#imageID").val();
+    const replyMsg = $("#reply-message"+index).val();
+
+    $.ajax({
+      url: "/comment/image/reply/"+imageID+"/"+commentID,
+      type: "put",
+      data: {replyMsg},
+      success: (data) => {
+        showToast("success", "Successfully Replied.", "toast-top-center", 1500);
+        setTimeout(() => {
+            location.reload();
+        }, 1500)
+      },
+      error: (err) => {
+
+      }
+    })
+}
+     
+  </script>
+@endsection

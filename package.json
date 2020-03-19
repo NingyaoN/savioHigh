@@ -1,0 +1,73 @@
+{
+    "name": "agni",
+    "version": "0.0.1",
+    "adonis-version": "4.1.0",
+    "description": "Crypto-bots on lose.",
+    "main": "index.js",
+    "scripts": {
+        "client-install": "npm install  --prefix public/profile",
+        "server": "nodemon server.js",
+        "client": "npm start --prefix public/profile",
+        "start": "nodemon server.js",
+        "test": "node ace test",
+        "lint": "prettier --write '{app,config,resources,start}/**/*.js'",
+        "lintCustom": "prettier --write 'public/dashboard/custom/**/*.js'",
+        "dev": "concurrently \"npm run server  \" \" npm run client \"",
+        "debug": "node --inspect server.js"
+    },
+    "keywords": [
+        "adonisjs",
+        "adonis-app"
+    ],
+    "author": "",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@adonisjs/ace": "^5.0.2",
+        "@adonisjs/auth": "^3.1.0",
+        "@adonisjs/bodyparser": "^2.0.9",
+        "@adonisjs/cors": "^1.0.7",
+        "@adonisjs/drive": "^1.0.4",
+        "@adonisjs/fold": "^4.0.9",
+        "@adonisjs/framework": "^5.0.13",
+        "@adonisjs/ignitor": "^2.0.8",
+        "@adonisjs/lucid": "^7.6.3",
+        "@adonisjs/mail": "^3.0.10",
+        "@adonisjs/redis": "^2.0.7",
+        "@adonisjs/session": "^1.0.29",
+        "@adonisjs/shield": "^1.0.8",
+        "@adonisjs/validator": "^5.0.6",
+        "adonis-mongoose-model": "^3.2.0",
+        "aws-sdk": "^2.639.0",
+        "bee-queue": "^1.2.3",
+        "concurrently": "^5.1.0",
+        "crypto": "^1.0.1",
+        "isemail": "^3.2.0",
+        "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "mongoose-sequence": "^5.2.2",
+        "node-gcm": "^1.0.2",
+        "nodemailer": "^6.4.5",
+        "otplib": "^12.0.1",
+        "phone": "^2.4.8",
+        "razorpay": "^2.0.6",
+        "request": "^2.88.2",
+        "request-promise": "^4.2.5",
+        "stripe": "^8.32.0",
+        "uuid": "^7.0.2",
+        "web-push": "^3.4.3",
+        "winston": "^3.2.1",
+        "winston-loggly-bulk": "git+https://github.com/loggly/winston-loggly-bulk.git#3.x"
+    },
+    "devDependencies": {
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb": "^18.1.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "nodemon": "^2.0.2",
+        "prettier": "^1.19.1"
+    },
+    "autoload": {
+        "App": "./app"
+    }
+}
