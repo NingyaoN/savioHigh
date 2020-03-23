@@ -156,11 +156,13 @@ class AppController {
     async blog({ view }) {
         const blogs = await Blog.find();
         let allBlogs = [];
+        let blogTypes = [];
 
         let i, j;
         for (i = 0; i < blogs.length; i++) {
             for (j = 0; j < blogs[i].user_blog.length; j++) {
                 let url;
+                blogTypes.push(blogs[i].user_blog[j].about)
                 const key = blogs[i].user_blog[j].photo_id;
                 if (key[0]) {
                     const image = await Drive.disk("s3").exists(key[0]);
@@ -176,7 +178,10 @@ class AppController {
                 allBlogs.push(blogs[i].user_blog[j]);
             }
         }
-        return view.render("dashboard.blog", { allBlogs });
+        blogTypes = blogTypes.filter(function(item, pos) {
+            return blogTypes.indexOf(item) == pos;
+        })
+        return view.render("dashboard.blog", { allBlogs, blogTypes });
     }
 
     async contact({ request, response, view }) {
