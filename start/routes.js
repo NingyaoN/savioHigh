@@ -91,6 +91,9 @@ Route.group(() => {
     Route.get("/shs/get/todo", "TodoController.getTodo");
     Route.put("/shs/:email/add/todo", "TodoController.addTodo");
     Route.post("/shs/todo/delete", "TodoController.deleteTodo");
+
+    //Newsletter
+    Route.put("/shs/:handle/newsletter/send", "Newsletters.send");
     Route.get("logout", "SessionController.delete");
 }).middleware(["auth:session"]);
 

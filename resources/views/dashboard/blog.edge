@@ -12,8 +12,8 @@
             <div class="row no-gutters slider-text align-items-center">
       <div class="col-md-9 ftco-animate">
         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
-        <h1 class="mb-3 bread">Read Our Articles</h1>
-        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+        <h1 class="mb-3 bread">Our Articles</h1>
+        <p>Write and Explore Ideas.</p>
       </div>
     </div>
         </div>
@@ -42,7 +42,7 @@
                     </div>
                     @endeach
                 </div><!-- END-->
-                <div class="row mt-5">
+             <!--   <div class="row mt-5">
               <div class="col text-center">
                 <div class="block-27">
                   <ul>
@@ -56,9 +56,12 @@
                   </ul>
                 </div>
               </div>
+            </div> -->
             </div>
-            </div>
-            <div class="col-lg-4 sidebar ftco-animate bg-light">
+      <div class="col-lg-4 sidebar ftco-animate bg-light">
+      
+        <!--TODO: IMPLEMENT SEARCH -->
+       <!--
         <div class="sidebar-box">
           <form action="#" class="search-form">
             <div class="form-group">
@@ -66,69 +69,16 @@
               <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
             </div>
           </form>
-        </div>
+        </div> -->
         <div class="sidebar-box ftco-animate">
             <h3 class="sidebar-heading">Categories</h3>
           <ul class="categories">
-            <li><a href="#">Fashion <span>(6)</span></a></li>
-            <li><a href="#">Technology <span>(8)</span></a></li>
-            <li><a href="#">Travel <span>(2)</span></a></li>
-            <li><a href="#">Food <span>(2)</span></a></li>
-            <li><a href="#">Photography <span>(7)</span></a></li>
+            @each(type in blogTypes)
+            <li><a href="#">{{type}} <span>(6)</span></a></li>
+            @endeach
           </ul>
         </div>
-
-        <div class="sidebar-box ftco-animate">
-          <h3 class="sidebar-heading">Popular Articles</h3>
-          <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-            <div class="text">
-              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-              <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
-          <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-            <div class="text">
-              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-              <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
-          <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-            <div class="text">
-              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-              <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sidebar-box ftco-animate">
-          <h3 class="sidebar-heading">Tag Cloud</h3>
-          <ul class="tagcloud">
-            <a href="#" class="tag-cloud-link">animals</a>
-            <a href="#" class="tag-cloud-link">human</a>
-            <a href="#" class="tag-cloud-link">people</a>
-            <a href="#" class="tag-cloud-link">cat</a>
-            <a href="#" class="tag-cloud-link">dog</a>
-            <a href="#" class="tag-cloud-link">nature</a>
-            <a href="#" class="tag-cloud-link">leaves</a>
-            <a href="#" class="tag-cloud-link">food</a>
-          </ul>
-        </div>
-
+<!--
         <div class="sidebar-box ftco-animate">
             <h3 class="sidebar-heading">Archives</h3>
           <ul class="categories">
@@ -140,7 +90,8 @@
             <li><a href="#">May 2018 <span>(5)</span></a></li>
           </ul>
         </div>
-      </div><!-- END COL -->
+      </div>
+    --><!-- END COL -->
         </div>
     </div>
 </section>
