@@ -1,8 +1,10 @@
 import React, { useState, Fragment } from "react";
+import { observer } from "mobx-react-lite";
 import { Formik, Form, Field } from "formik";
 import { css } from "@emotion/core";
 import DotLoader from "react-spinners/DotLoader";
 import Axios from 'axios';
+
 
 
 
@@ -15,7 +17,7 @@ const override = css`
 `;
 
 
-function validateEmail(value) {
+const  validateEmail = (value) => {
   let error;
 
   if (!value) {
@@ -29,7 +31,6 @@ function validateEmail(value) {
 
 function validateName(value) {
   let error;
-
   if (value === "admin") {
     error = "Nice try!";
   }
@@ -63,9 +64,9 @@ const font = {
   color: "red"
 }
 
-export const EditForm = (props) => {
+export const EditForm = observer((props) => {
+  const {_id, name, email, phone, bio } = props.store.user;
   const [loading, setLoading] = useState(false);
-
   const [isEdit, setEdit] = useState(false);
   const [disabled, setDisabled] = useState("disabled");
   const editToggle = () => {
@@ -75,13 +76,9 @@ export const EditForm = (props) => {
 
 
   const onSubmit = values => {
-    setLoading(true)
-    Axios.post(`user/${props.profile._id}/update`, { values })
-      .then((response) => {
-        console.log(response)
-        setLoading(false);
-        window.location.reload();
-      })
+    setLoading()
+    props.store.updateUser(values);
+    window.location.reload();
   };
 
   if (loading) {
@@ -95,7 +92,7 @@ export const EditForm = (props) => {
               color={"#123abc"}
               loading={loading}
             />
-            <p style={{ color: "black" }}>Fetching Data...</p>
+            <p style={{ color: "black" }}>Updating Data...</p>
           </div>
         </div>
       </div>
@@ -105,15 +102,15 @@ export const EditForm = (props) => {
     return (
      <Fragment>
        <div>
-       <button onClick={editToggle} className="btn btn-sm btn-outline-danger mb-1 float-right">{(isEdit) ? "Cancel" : "Edit"}</button>
+       <button onClick={editToggle} className="btn btn-sm btn-outline-danger mb-1 float-right">{(isEdit) ? "Cancel" : "Enable Edit"}</button>
        </div>
        <div>
        <Formik
         initialValues={{
-          name: props.profile.name,
-          email: props.profile.email,
-          phone: props.profile.phone,
-          status: props.profile.bio || "Please Update Status",
+          name,
+          email,
+          phone,
+          bio: bio || "Please Update Status",
 
         }}
         onSubmit={onSubmit}
@@ -135,7 +132,7 @@ export const EditForm = (props) => {
             {errors.phone && touched.phone && errors.phone}
 
             {/* <button onClick={editToggle} className="btn btn-sm btn-outline-danger mb-1 float-right">{(isEdit) ? "Cancel" : "Edit"}</button> */}
-            <Field name="status" validate={validateStatus} className="form-control mb-3"   disabled={(disabled) ? "disabled" : ""}/>
+            <Field name="bio" validate={validateStatus} className="form-control mb-3"   disabled={(disabled) ? "disabled" : ""}/>
             {errors.status && touched.status && errors.status}
 
 
@@ -149,7 +146,7 @@ export const EditForm = (props) => {
      </Fragment>
     );
   }
-};
+});
 
 
 

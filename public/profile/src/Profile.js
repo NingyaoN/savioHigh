@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useState, useEffect } from 'react';
-import { Observer, useObservable } from "mobx-react-lite";
+import { observer, useObservable } from "mobx-react-lite";
 import { AddPicture } from './AddPicture'
 import { EditForm } from './EditForm';
 import avatar from './avatar.png';
 import './css/profile.css';
 
 
-export function Profile(props) {
+export const  Profile =  observer((props) => {
     const style = {
         verticalAlign: "middle",
         width: "50px",
@@ -22,19 +22,10 @@ export function Profile(props) {
     }
     const [isToggle, setToggled] = useState(false);
 
-    const [name, setName] = useState(props.profile.name);
-    const [email, setEmail] = useState(props.profile.email);
-    const [phone, setPhone] = useState(props.profile.phone);
-    const [status, setStatus] = useState(props.profile.status);
-
-    //attribute 
-   
-
     useEffect(() => {
         console.log(isToggle)
     })
     
-    const person = useObservable({ name: "Ningyao Ningshen" });
     const toggle = () => setToggled(!isToggle)
 
     return (
@@ -53,7 +44,7 @@ export function Profile(props) {
                     </div>
                   
                     <div className="col-sm-8">
-                        <EditForm profile={props.profile}/>
+                        <EditForm store={props.store}/>
                     </div>
                 </div>
             ) : (
@@ -61,7 +52,7 @@ export function Profile(props) {
                     <div className="row">
                     <div className="col-sm-12">
                         <img className="avatar" style={style} src={avatar} /> <br />
-                        <p style={font}>{props.profile.bio}.<sub><sub> <span style={{fontSize: "10px", color: "red"}}><i>{props.profile.name}</i></span></sub></sub></p>
+                        <p style={font}>{props.store.user.bio}.<sub><sub> <span style={{fontSize: "10px", color: "red"}}><i>{props.store.user.name}</i></span></sub></sub></p>
                        
                     </div>
                     <div className="col-sm-12">
@@ -79,5 +70,5 @@ export function Profile(props) {
             )}
         </div>
     );
-}
+})
 

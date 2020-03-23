@@ -20,8 +20,18 @@ class ProfileController {
         const user = await User.findOne({_id: ObjectID(request.params.userID)});
         console.log(user)
         if(!user) return response.status(500).json({msg: "User does not exist."});
-
         return response.status(200).json(user)
+    }
+    async updateProfile({request, response, auth}) {
+        const user = await User.findOne({_id: request.params.userID});
+        if(!user) return response.status(500).json({msg: "User not found."});
+        const data = await request.all();
+        user.name = data.user.name;
+        user.email = data.user.email;
+        user.phone = data.user.phone;
+        user.bio = data.user.bio; 
+        await user.save();
+        return response.status(200).json(user);
     }
     async editProfile({ request, response, auth }) {
         const data = await request.only(["name", "email", "phone", "bio"]);
