@@ -8,12 +8,14 @@
       <div class="col-md-9 ftco-animate">
         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact Us</span></p>
         <h1 class="mb-3 bread">Contact Us</h1>
-        <p>Contacts of all the Executive and Fore Runner</p>
+        <p>Contacts of all the Admins</p>
       </div>
     </div>
         </div>
     </section>
     <section class="ftco-section contact-section">
+      <input type="hidden" value="{{auth.user.name}}" id="name" />
+      <input type="hiddent" value="{{auth.user._id}}" id="userID" />
   <div class="container">
     <div class="row d-flex mb-5 contact-info">
       <div class="col-md-12 mb-4">
@@ -45,27 +47,25 @@
       @endeach
     </div>
     <div class="row block-12">
+      <div class="col-sm-12">
+        <label>Sent query to admins</label>
+      </div>
       <div class="col-md-12 order-md-last d-flex">
-        <form action="#" class="bg-light p-5 contact-form">
+        <div  class="bg-light p-5 contact-form">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Your Name">
+            <input type="text" name="to" id="to" class="form-control" placeholder="To: Name/Email"></textarea>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Your Email">
+            <textarea name="msg" id="msg" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Subject">
+            <button id="send" value="Send Message" class="btn btn-primary py-3 px-5">Send Query</button>
           </div>
-          <div class="form-group">
-            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-          </div>
-          <div class="form-group">
-            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-          </div>
-        </form>
+        </div>
       
       </div>
     </div>
   </div>
 </section>
+<script type="module" src="/custom/js/newsletters.js"></script>
 @endsection
