@@ -36,8 +36,8 @@ Route.group(() => {
 
 Route.group(() => {
     Route.get("/users", "ProfileController.allusers");
-    Route.get("/user/:userID", "ProfileController.getUser");
-    Route.post("/user/:userID/profile/update", "ProfileController.updateProfile")
+    Route.get("/user/:userID/fetch", "ProfileController.getUser");
+    Route.post("/user/profile/:userID/update", "ProfileController.updateProfile")
 }).prefix("api")
 // User Session Controller (loging out)
 Route.group(() => {
