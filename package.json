@@ -5,9 +5,9 @@
     "description": "Crypto-bots on lose.",
     "main": "index.js",
     "scripts": {
-        "client-install": "npm install  --prefix public/profile",
+        "client-install": "npm install  --prefix public/shs_dashboard",
         "server": "nodemon server.js",
-        "client": "npm start --prefix public/profile",
+        "client": "npm start --prefix public/shs_dashboard",
         "start": "nodemon server.js",
         "test": "node ace test",
         "lint": "prettier --write '{app,config,resources,start}/**/*.js'",

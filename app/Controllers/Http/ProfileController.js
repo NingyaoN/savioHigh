@@ -3,6 +3,7 @@ const Image = use("App/Models/Image");
 const Blog = use("App/Models/Blog");
 const Drive = use("Drive");
 const { ObjectID } = use("mongodb")
+const {auth} =  use("./utility/auth");
 
 
 class ProfileController {
@@ -18,9 +19,13 @@ class ProfileController {
 
     async getUser({request, response, auth }) {
         const user = await User.findOne({_id: ObjectID(request.params.userID)});
-        console.log(user)
+        console.log("===========",user)
         if(!user) return response.status(500).json({msg: "User does not exist."});
         return response.status(200).json(user)
+    }
+    async fetchUser({ request, response, auth}) {
+        const authUser = await auth.getUser();
+        return response.status(200).json(authUser);
     }
     async updateProfile({request, response, auth}) {
         const user = await User.findOne({_id: request.params.userID});

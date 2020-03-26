@@ -41,22 +41,22 @@ class AppController {
         return view.render("dashboard.gallery", { allThumbnail, count: allThumbnail.length })
     }
     async authenticatedRedirect({ view }) {
-        let images = await Image.find();
-        images = await Promise.all(await images.map(async image => {
-            let url;
-            const key = image.photo_id;
-            if (key[0]) {
-                const image = await Drive.disk("s3").exists(key[0]);
-                if (image) {
-                    url = await Drive.disk("s3").getSignedUrl(key[0]);
-                }
-            }
-            image.photo_id = url;
-            return image;
-        }))
-        console.log(images)
+        // let images = await Image.find();
+        // images = await Promise.all(await images.map(async image => {
+        //     let url;
+        //     const key = image.photo_id;
+        //     if (key[0]) {
+        //         const image = await Drive.disk("s3").exists(key[0]);
+        //         if (image) {
+        //             url = await Drive.disk("s3").getSignedUrl(key[0]);
+        //         }
+        //     }
+        //     image.photo_id = url;
+        //     return image;
+        // }))
+        // console.log(images)
 
-        // const images = [];
+         const images = [];
         return view.render('dashboard.dashboard', { images, year: moment().format("MM-YYYY")}); 
 
     }
